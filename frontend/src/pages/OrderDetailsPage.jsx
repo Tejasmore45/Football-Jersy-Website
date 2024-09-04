@@ -12,7 +12,7 @@ const OrderDetailsPage = () => {
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/orders/${orderId}`, {
+        const response = await axios.get(`https://football-jersy-website-backend.onrender.com/api/orders/${orderId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         if (response.data) {

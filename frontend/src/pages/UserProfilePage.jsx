@@ -9,7 +9,7 @@ const UserProfilePage = () => {
     const fetchUserProfile = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:5000/api/users/profile', {
+        const response = await axios.get('https://football-jersy-website-backend.onrender.com/api/users/profile', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setUser(response.data);

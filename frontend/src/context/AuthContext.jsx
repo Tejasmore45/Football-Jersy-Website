@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
       }
 
       try {
-        const { data } = await axios.get('http://localhost:5000/api/users/profile', {
+        const { data } = await axios.get('https://football-jersy-website-backend.onrender.com/api/users/profile', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(data);

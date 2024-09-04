@@ -51,7 +51,7 @@ const CheckoutPage = () => {
 
     try {
       // Make an API request to place the order
-      const response = await axios.post('http://localhost:5000/api/orders', {
+      const response = await axios.post('https://football-jersy-website-backend.onrender.com/api/orders', {
         orderItems: aggregatedItems.map(item => ({
           jersey: item.id,
           qty: item.quantity,

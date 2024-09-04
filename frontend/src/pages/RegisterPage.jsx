@@ -14,7 +14,7 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/users/register', { name, email, password });
+      await axios.post('https://football-jersy-website-backend.onrender.com/api/users/register', { name, email, password });
       setSuccess('Registration successful! Redirecting to login...');
       setTimeout(() => {
         navigate('/login');

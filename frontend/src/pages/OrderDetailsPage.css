@@ -54,3 +54,57 @@
   font-size: 16px; /* Slightly smaller font size for order items */
   color: #000000; /* Black color for consistency */
 }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .order-details-container {
+    padding: 15px;
+  }
+
+  .order-details-container h1 {
+    font-size: 22px; /* Adjust heading size on medium screens */
+  }
+
+  .order-details-container p {
+    font-size: 16px; /* Adjust font size for paragraphs on medium screens */
+  }
+
+  .order-details-container h2 {
+    font-size: 18px; /* Adjust subheading size on medium screens */
+  }
+
+  .order-details-container .order-item {
+    padding: 8px;
+  }
+
+  .order-details-container .order-item p {
+    font-size: 14px; /* Smaller font size for order items on medium screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .order-details-container {
+    padding: 10px;
+  }
+
+  .order-details-container h1 {
+    font-size: 20px; /* Smaller heading size on small screens */
+  }
+
+  .order-details-container p {
+    font-size: 14px; /* Smaller font size for paragraphs on small screens */
+  }
+
+  .order-details-container h2 {
+    font-size: 16px; /* Smaller subheading size on small screens */
+  }
+
+  .order-details-container .order-item {
+    padding: 6px;
+    margin-bottom: 8px; /* Reduce margin between items */
+  }
+
+  .order-details-container .order-item p {
+    font-size: 12px; /* Smaller font size for order items on small screens */
+  }
+}

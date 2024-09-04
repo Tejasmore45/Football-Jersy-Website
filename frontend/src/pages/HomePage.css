@@ -3,22 +3,51 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Ensure it takes up the full viewport height */
-  background: linear-gradient(135deg, #e2e2e2, #ffffff); /* Soft gradient background */
-  padding: 2rem; /* Add some padding for better spacing */
-  text-align: center; /* Center the text */
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e2e2e2, #ffffff);
+  padding: 2rem;
+  text-align: center;
+}
+
+.homepage-content {
+  max-width: 1200px; /* Constrain the content width for larger screens */
+  width: 100%;
+  padding: 0 1.5rem; /* Add padding for smaller screens */
 }
 
 .homepage-title {
-  font-size: 3rem; /* Increase title size for more impact */
-  color: #2c3e50; /* Darker shade for a modern look */
-  margin-bottom: 1.5rem; /* Increase spacing below title */
-  font-weight: bold; /* Make the title bold */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  font-size: 2.5rem; /* Adjusted for responsiveness */
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: font-size 0.3s ease; /* Smooth transition on font size changes */
 }
 
 .homepage-description {
-  font-size: 1.5rem; /* Slightly larger description font */
-  color: #34495e; /* Darker gray color for readability */
-  line-height: 1.6; /* Improve line spacing for readability */
+  font-size: 1.25rem;
+  color: #34495e;
+  line-height: 1.6;
+  transition: font-size 0.3s ease; /* Smooth transition on font size changes */
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  .homepage-title {
+      font-size: 3rem; /* Larger title on medium to large screens */
+  }
+
+  .homepage-description {
+      font-size: 1.5rem; /* Larger description on medium to large screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .homepage-title {
+      font-size: 2rem; /* Smaller title on very small screens */
+  }
+
+  .homepage-description {
+      font-size: 1rem; /* Smaller description on very small screens */
+  }
 }

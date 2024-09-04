@@ -69,3 +69,47 @@ p {
   color: #000000; /* Black color for paragraphs */
   font-weight: normal; /* Normal font weight for readability */
 }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .orders-container {
+    padding: 15px;
+  }
+
+  .order-item {
+    padding: 12px;
+  }
+
+  .order-item h2 {
+    font-size: 1.2em; /* Adjust heading size on medium screens */
+  }
+
+  .view-details-button {
+    padding: 8px 16px; /* Adjust button padding on medium screens */
+    font-size: 0.9em; /* Slightly smaller font size */
+  }
+}
+
+@media (max-width: 480px) {
+  .orders-container {
+    padding: 10px;
+  }
+
+  .order-item {
+    padding: 10px;
+    margin-bottom: 15px; /* Reduce margin between items */
+  }
+
+  .order-item h2 {
+    font-size: 1.1em; /* Smaller font size for headings on small screens */
+  }
+
+  .view-details-button {
+    padding: 8px 12px; /* Adjust button padding on small screens */
+    font-size: 0.8em; /* Smaller font size */
+  }
+
+  .loading-message, .error-message {
+    font-size: 1em; /* Adjust font size for messages on small screens */
+  }
+}

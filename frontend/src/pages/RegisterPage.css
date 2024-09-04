@@ -1,75 +1,110 @@
-/* src/pages/RegisterPage.css */
-
 /* General Container Styling */
 .register-container {
-    max-width: 500px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #ffffff; /* White background for contrast */
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #ffffff; /* White background for contrast */
+}
+
+/* Heading Styling */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50; /* Darker shade for a modern look */
+  font-size: 2rem; /* Adjusted for visual impact */
+}
+
+/* Form Group Styling */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Label Styling */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #000000; /* Black label color */
+}
+
+/* Input Styling */
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da; /* Light gray border */
+  border-radius: 4px;
+  background-color: #f8f9fa; /* Light gray background */
+  color: #000000; /* Black text color */
+}
+
+/* Button Styling */
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #ffffff; /* White text color */
+  font-size: 1rem; /* Standard font size */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Button Hover Styling */
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Success Message Styling */
+.success-message {
+  color: #28a745; /* Green color for success messages */
+  text-align: center;
+  font-size: 1.1rem; /* Slightly larger font size */
+}
+
+/* Error Message Styling */
+.error-message {
+  color: #dc3545; /* Red color for error messages */
+  text-align: center;
+  font-size: 1.1rem; /* Slightly larger font size */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .register-container {
+    padding: 15px;
   }
-  
-  /* Heading Styling */
+
   h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #2c3e50; /* Darker shade for a modern look */
-    font-size: 2rem; /* Adjusted for visual impact */
+    font-size: 1.8rem; /* Adjusted heading size on medium screens */
   }
-  
-  /* Form Group Styling */
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  /* Label Styling */
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #000000; /* Black label color */
-  }
-  
-  /* Input Styling */
+
   input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ced4da; /* Light gray border */
-    border-radius: 4px;
-    background-color: #f8f9fa; /* Light gray background */
-    color: #000000; /* Black text color */
+    padding: 8px; /* Slightly smaller padding for inputs on medium screens */
   }
-  
-  /* Button Styling */
+
   button {
-    width: 100%;
+    padding: 8px; /* Slightly smaller padding for button on medium screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .register-container {
     padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: #ffffff; /* White text color */
-    font-size: 1rem; /* Standard font size */
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition */
   }
-  
-  /* Button Hover Styling */
-  button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+
+  h1 {
+    font-size: 1.6rem; /* Smaller heading size on small screens */
   }
-  
-  /* Success Message Styling */
-  .success-message {
-    color: #28a745; /* Green color for success messages */
-    text-align: center;
-    font-size: 1.1rem; /* Slightly larger font size */
+
+  input {
+    padding: 6px; /* Smaller padding for inputs on small screens */
   }
-  
-  /* Error Message Styling */
-  .error-message {
-    color: #dc3545; /* Red color for error messages */
-    text-align: center;
-    font-size: 1.1rem; /* Slightly larger font size */
+
+  button {
+    padding: 6px; /* Smaller padding for button on small screens */
+    font-size: 0.9rem; /* Slightly smaller font size for button on small screens */
   }
-  
+}

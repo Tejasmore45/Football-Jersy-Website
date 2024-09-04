@@ -3,6 +3,8 @@
   padding: 20px;
   background-color: #ffffff; /* White background for the cart */
   color: #000000; /* Black text color */
+  max-width: 1200px; /* Maximum width for larger screens */
+  margin: auto; /* Center the container */
 }
 
 /* Cart Items Container Styling */
@@ -13,19 +15,22 @@
 /* Individual Cart Item Styling */
 .cart-item {
   display: flex;
-  align-items: center;
+  flex-direction: column; /* Stack image and details vertically */
+  align-items: flex-start;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 15px;
   border-bottom: 1px solid #dee2e6; /* Light border for separation */
   background-color: #ffffff; /* White background for items */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 /* Cart Item Image Styling */
 .cart-item-image {
-  width: 120px;
+  width: 100px;
   height: auto;
   object-fit: cover;
-  margin-right: 20px;
+  margin-bottom: 15px; /* Space below image */
   border-radius: 8px;
   border: 1px solid #dee2e6; /* Border around the image */
 }
@@ -33,6 +38,7 @@
 /* Cart Item Details Styling */
 .cart-item-details {
   flex: 1;
+  text-align: left; /* Left-align text */
 }
 
 .cart-item-details h4 {
@@ -58,8 +64,8 @@
 /* Cart Actions Styling */
 .cart-actions {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column; /* Stack buttons vertically */
+  gap: 10px; /* Space between buttons */
   margin-top: 20px;
 }
 
@@ -68,6 +74,7 @@
   font-size: 1.2em;
   font-weight: bold; /* Emphasize the total amount */
   color: #000000; /* Black text color */
+  margin-bottom: 15px; /* Space below total amount */
 }
 
 /* Button Styling */
@@ -79,7 +86,6 @@
   cursor: pointer;
   transition: background-color 0.3s ease; /* Smooth transition for background color */
   width: auto; /* Ensure buttons don’t take full width */
-  display: inline-block; /* Ensure buttons don't stretch to full width */
   text-align: center; /* Ensure text is centered within the button */
 }
 
@@ -111,4 +117,40 @@
 
 .btn-danger:hover {
   background-color: #c82333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cart-item {
+    flex-direction: row; /* Stack image and details side-by-side */
+    align-items: center; /* Center align items vertically */
+  }
+
+  .cart-item-image {
+    width: 80px; /* Smaller image for smaller screens */
+    margin-right: 15px; /* Space between image and details */
+  }
+
+  .cart-actions {
+    flex-direction: column; /* Stack actions vertically */
+  }
+}
+
+@media (max-width: 576px) {
+  .cart-container {
+    padding: 15px; /* Reduced padding for smaller screens */
+  }
+
+  .cart-item {
+    padding: 10px; /* Reduced padding for smaller screens */
+  }
+
+  .cart-item-image {
+    width: 60px; /* Further reduced image size */
+  }
+
+  .btn {
+    padding: 8px 16px; /* Adjust button padding */
+    font-size: 0.9em; /* Smaller font size for buttons */
+  }
 }

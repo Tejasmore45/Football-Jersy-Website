@@ -1,0 +1,87 @@
+/* Navbar styling */
+.navbar {
+  position: sticky !important; /* Make the navbar stick to the top */
+  top: 0; /* Stick to the top of the viewport */
+  background-color: #1a1a1a; /* Dark background color */
+  padding: 0.5rem 1rem; /* Padding for spacing */
+  z-index: 1000; /* Ensure it stays above other content */
+  width: 100%; /* Full width */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  border-bottom: 1px solid #ddd; /* Border to separate from content */
+}
+
+/* Navbar brand styling */
+.navbar-brand {
+  color: #ffffff; /* White text color */
+  font-weight: bold;
+  font-size: 1.5rem; /* Adjusted font size */
+}
+
+/* Navbar links styling */
+.navbar-nav .nav-link {
+  color: #ffffff; /* White text color for links */
+  margin-right: 1.5rem; /* Spacing between nav items */
+  transition: color 0.3s ease, transform 0.3s ease; /* Transition for hover effects */
+}
+
+.navbar-nav .nav-link:hover {
+  color: #e2e2e2; /* Slightly lighter grey on hover */
+  transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+/* Sign out button styling */
+.signout-btn {
+  color: #ffffff; /* White text color */
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease; /* Transition for hover effects */
+}
+
+.signout-btn:hover {
+  color: #ff4d4d; /* Red color on hover */
+  transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+/* Navbar toggler icon styling */
+.navbar-toggler-icon {
+  background-color: #ffffff; /* White icon for toggler */
+  width: 30px; /* Width of the toggler */
+  height: 20px; /* Height of the toggler */
+  background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M3 6H21M3 12H21M3 18H21" stroke="%23ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3C/path%3E%3C/svg%3E'); /* Hamburger icon SVG */
+}
+
+/* Badge styling */
+.badge {
+  background-color: #ff5722; /* Orange badge color */
+  color: #ffffff; /* White text color on badge */
+}
+
+/* Responsive styling for navbar on small screens */
+@media (max-width: 991px) {
+  .navbar-nav {
+    text-align: center; /* Center text for smaller screens */
+    margin-top: 1rem; /* Margin top to avoid overlap with toggler */
+  }
+
+  .navbar-nav .nav-link {
+    margin-right: 0; /* Remove right margin on smaller screens */
+    margin-bottom: 1rem; /* Add bottom margin for spacing */
+  }
+
+  .navbar-toggler {
+    margin-right: 1rem; /* Margin for the toggler button */
+  }
+}
+
+/* Further responsiveness for very small screens */
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 1.25rem; /* Smaller brand font size */
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 0.875rem; /* Smaller font size for nav links */
+  }
+}

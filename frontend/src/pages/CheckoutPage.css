@@ -1,0 +1,66 @@
+/* General Checkout Container Styling */
+.checkout-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  background-color: #ffffff; /* White background */
+  color: #000000; /* Black text color */
+}
+
+/* Checkout Form Styling */
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form Group Styling */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #000000; /* Black label color */
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  background-color: #f8f9fa; /* Light gray input background */
+  color: #000000; /* Black text color in inputs */
+  border: 1px solid #ced4da; /* Light gray border */
+}
+
+/* Order Summary Styling */
+.order-summary {
+  margin-top: 20px;
+}
+
+.order-summary ul {
+  list-style: none;
+  padding: 0;
+}
+
+.order-summary li {
+  margin-bottom: 10px;
+  color: #000000; /* Black text color for order items */
+}
+
+/* Total Amount Styling */
+.total-amount {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #000000; /* Black text color for total amount */
+}
+
+/* Order Placed Message Styling */
+.order-placed-message {
+  padding: 15px;
+  background-color: #d4edda; /* Light green background for success message */
+  color: #155724; /* Dark green text color */
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  text-align: center;
+}

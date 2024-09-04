@@ -1,0 +1,30 @@
+/* Container for the user profile page */
+.user-profile-container {
+    padding: 20px;
+    max-width: 800px; /* Ensure container width is consistent */
+    margin: auto; /* Center the container */
+    border: 1px solid #ddd; /* Light border for separation */
+    border-radius: 8px; /* Rounded corners for a modern look */
+    background-color: #ffffff; /* White background for clarity */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation effect */
+  }
+  
+  /* Main heading styling */
+  .user-profile-container h1 {
+    margin-bottom: 20px;
+    font-size: 24px; /* Size of the heading */
+    color: #000000; /* Black color for better readability */
+    font-weight: bold; /* Bold for emphasis */
+  }
+  
+  /* User details styling */
+  .user-details p {
+    margin: 10px 0;
+    font-size: 18px; /* Font size for readability */
+    color: #000000; /* Black color for consistency */
+  }
+  
+  .user-details p strong {
+    font-weight: bold; /* Emphasize labels */
+  }
+  

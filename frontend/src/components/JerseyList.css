@@ -1,0 +1,17 @@
+/* Jersey List Container Styling */
+.jersey-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  background-color: #ffffff; /* White background for consistency with the theme */
+}
+
+/* No Jerseys Message Styling */
+.no-jerseys {
+  color: #000000; /* Black color for the text */
+  font-size: 1.2rem;
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
+}

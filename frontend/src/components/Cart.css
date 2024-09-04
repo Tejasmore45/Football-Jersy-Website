@@ -1,0 +1,114 @@
+/* General Cart Container Styling */
+.cart-container {
+  padding: 20px;
+  background-color: #ffffff; /* White background for the cart */
+  color: #000000; /* Black text color */
+}
+
+/* Cart Items Container Styling */
+.cart-items {
+  margin-top: 20px;
+}
+
+/* Individual Cart Item Styling */
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-bottom: 1px solid #dee2e6; /* Light border for separation */
+  background-color: #ffffff; /* White background for items */
+}
+
+/* Cart Item Image Styling */
+.cart-item-image {
+  width: 120px;
+  height: auto;
+  object-fit: cover;
+  margin-right: 20px;
+  border-radius: 8px;
+  border: 1px solid #dee2e6; /* Border around the image */
+}
+
+/* Cart Item Details Styling */
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-details h4 {
+  margin: 0 0 10px 0;
+  color: #000000; /* Black text color */
+}
+
+.cart-item-details p {
+  margin: 5px 0; /* Consistent spacing between paragraphs */
+  color: #000000; /* Black text color */
+}
+
+/* Login Required Popup Styling */
+.login-required-popup {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center; /* Center text */
+}
+
+/* Cart Actions Styling */
+.cart-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Total Amount Styling */
+.cart-total {
+  font-size: 1.2em;
+  font-weight: bold; /* Emphasize the total amount */
+  color: #000000; /* Black text color */
+}
+
+/* Button Styling */
+.btn {
+  padding: 10px 20px; /* Adjust padding for button size */
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+  width: auto; /* Ensure buttons don’t take full width */
+  display: inline-block; /* Ensure buttons don't stretch to full width */
+  text-align: center; /* Ensure text is centered within the button */
+}
+
+/* Primary Button */
+.btn-primary {
+  background-color: #007bff;
+  color: #ffffff; /* White text color */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Warning Button */
+.btn-warning {
+  background-color: #ffc107;
+  color: #212529; /* Dark text color for visibility */
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+/* Danger Button */
+.btn-danger {
+  background-color: #dc3545;
+  color: #ffffff; /* White text color */
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}

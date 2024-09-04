@@ -1,0 +1,56 @@
+/* Container for the order details page */
+.order-details-container {
+  padding: 20px;
+  max-width: 800px; /* Ensure the container does not exceed this width */
+  margin: auto; /* Center the container */
+  border: 1px solid #ddd; /* Light border for separation */
+  border-radius: 8px; /* Rounded corners for a modern look */
+  background-color: #ffffff; /* White background for clarity */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation effect */
+}
+
+/* Main heading styling */
+.order-details-container h1 {
+  margin-bottom: 20px;
+  font-size: 24px; /* Size of the heading */
+  color: #000000; /* Black color for better readability */
+  font-weight: bold; /* Bold for emphasis */
+}
+
+/* Paragraph styling */
+.order-details-container p {
+  margin: 10px 0;
+  font-size: 18px; /* Font size for readability */
+  color: #000000; /* Black color for consistency */
+}
+
+/* Subheading styling */
+.order-details-container h2 {
+  margin-top: 20px;
+  font-size: 20px; /* Size of the subheading */
+  color: #000000; /* Black color for consistency */
+  font-weight: bold; /* Bold for emphasis */
+}
+
+/* List styling */
+.order-details-container ul {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
+}
+
+/* Individual order item styling */
+.order-details-container .order-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd; /* Light border for separation */
+  border-radius: 4px; /* Slightly rounded corners */
+  background-color: #ffffff; /* White background for clarity */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation effect */
+}
+
+/* Styling for paragraph elements inside order items */
+.order-details-container .order-item p {
+  margin: 5px 0;
+  font-size: 16px; /* Slightly smaller font size for order items */
+  color: #000000; /* Black color for consistency */
+}

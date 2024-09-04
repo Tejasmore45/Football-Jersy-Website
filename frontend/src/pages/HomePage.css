@@ -1,0 +1,24 @@
+.homepage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ensure it takes up the full viewport height */
+  background: linear-gradient(135deg, #e2e2e2, #ffffff); /* Soft gradient background */
+  padding: 2rem; /* Add some padding for better spacing */
+  text-align: center; /* Center the text */
+}
+
+.homepage-title {
+  font-size: 3rem; /* Increase title size for more impact */
+  color: #2c3e50; /* Darker shade for a modern look */
+  margin-bottom: 1.5rem; /* Increase spacing below title */
+  font-weight: bold; /* Make the title bold */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.homepage-description {
+  font-size: 1.5rem; /* Slightly larger description font */
+  color: #34495e; /* Darker gray color for readability */
+  line-height: 1.6; /* Improve line spacing for readability */
+}

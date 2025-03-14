@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
-import axios from 'axios'; // Make sure to import axios
-import './CheckoutPage.css'; // Import the CSS file for styling
+import axios from 'axios'; // Import axios
+import './CheckoutPage.css'; // Import CSS for styling
 
 const CheckoutPage = () => {
-  const { state, dispatch } = useCart(); // Assuming you have a dispatch method to clear the cart
+  const { state, dispatch } = useCart(); // Access cart state and dispatch
   const [formData, setFormData] = useState({
     name: '',
     address: '',
     city: '',
-    country: '', // Replaced state with country
+    country: '',
     postalCode: '',
     paymentMethod: 'Cash on Delivery'
   });
@@ -31,16 +31,15 @@ const CheckoutPage = () => {
     const aggregateCartItems = () => {
       const itemMap = new Map();
       state.cart.forEach(item => {
-        // Ensure item.price is a string and convert to number
         const priceString = typeof item.price === 'string' ? item.price : item.price.toString();
-        const price = parseFloat(priceString.replace('₹', '').replace(',', '').trim()); // Convert to number
-        
-        if (itemMap.has(item.id)) {
-          const existingItem = itemMap.get(item.id);
+        const price = parseFloat(priceString.replace('₹', '').replace(',', '').trim());
+
+        if (itemMap.has(item._id)) {
+          const existingItem = itemMap.get(item._id);
           existingItem.quantity += 1;
           existingItem.totalPrice += price;
         } else {
-          itemMap.set(item.id, { ...item, quantity: 1, totalPrice: price });
+          itemMap.set(item._id, { ...item, quantity: 1, totalPrice: price });
         }
       });
       return Array.from(itemMap.values());
@@ -50,31 +49,33 @@ const CheckoutPage = () => {
     const totalAmount = aggregatedItems.reduce((acc, item) => acc + item.totalPrice, 0);
 
     try {
-      // Make an API request to place the order
-      const response = await axios.post('https://football-jersy-website-backend.onrender.com/api/orders', {
-        orderItems: aggregatedItems.map(item => ({
-          jersey: item.id,
-          qty: item.quantity,
-          price: item.totalPrice
-        })),
-        totalPrice: totalAmount,
-        shippingAddress: {
-          address: formData.address,
-          city: formData.city,
-          postalCode: formData.postalCode,
-          country: formData.country // Include country in the request
+      const response = await axios.post(
+        'https://football-jersy-website-backend.onrender.com/api/orders',
+        {
+          orderItems: aggregatedItems.map(item => ({
+            jersey: item._id,
+            qty: item.quantity,
+            price: item.totalPrice
+          })),
+          totalPrice: totalAmount,
+          shippingAddress: {
+            address: formData.address,
+            city: formData.city,
+            postalCode: formData.postalCode,
+            country: formData.country
+          },
+          paymentMethod: formData.paymentMethod
         },
-        paymentMethod: formData.paymentMethod
-      }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
         }
-      });
+      );
 
       if (response.status === 201) {
         setOrderPlaced(true);
-        // Optionally, clear the cart
-        dispatch({ type: 'CLEAR_CART' });
+        dispatch({ type: 'CLEAR_CART' }); // Clear cart after successful order
       } else {
         throw new Error('Order could not be placed.');
       }
@@ -84,26 +85,21 @@ const CheckoutPage = () => {
     }
   };
 
-  // Define aggregateCartItems function here
-  const aggregateCartItems = () => {
-    const itemMap = new Map();
-    state.cart.forEach(item => {
-      // Ensure item.price is a string and convert to number
-      const priceString = typeof item.price === 'string' ? item.price : item.price.toString();
-      const price = parseFloat(priceString.replace('₹', '').replace(',', '').trim()); // Convert to number
-      
-      if (itemMap.has(item.id)) {
-        const existingItem = itemMap.get(item.id);
-        existingItem.quantity += 1;
-        existingItem.totalPrice += price;
-      } else {
-        itemMap.set(item.id, { ...item, quantity: 1, totalPrice: price });
-      }
-    });
-    return Array.from(itemMap.values());
-  };
+  const aggregatedItems = state.cart.reduce((acc, item) => {
+    const priceString = typeof item.price === 'string' ? item.price : item.price.toString();
+    const price = parseFloat(priceString.replace('₹', '').replace(',', '').trim());
 
-  const aggregatedItems = aggregateCartItems();
+    const existingItem = acc.find(cartItem => cartItem._id === item._id);
+    if (existingItem) {
+      existingItem.quantity += 1;
+      existingItem.totalPrice += price;
+    } else {
+      acc.push({ ...item, quantity: 1, totalPrice: price });
+    }
+
+    return acc;
+  }, []);
+
   const totalAmount = aggregatedItems.reduce((acc, item) => acc + item.totalPrice, 0);
 
   return (
@@ -170,24 +166,8 @@ const CheckoutPage = () => {
                 required
               />
             </div>
-            <div className="form-group">
-              <label>Payment Method</label>
-              <p>{formData.paymentMethod}</p>
-            </div>
             <div className="order-summary">
-              <h3>Order Summary</h3>
-              <ul>
-                {aggregatedItems.map(item => (
-                  <li key={item.id}>
-                    <div>{item.name}</div>
-                    <div>Quantity: {item.quantity}</div>
-                    <div>Price: ₹{item.totalPrice.toFixed(2)}</div>
-                  </li>
-                ))}
-              </ul>
-              <div className="total-amount">
-                <h3>Total: ₹{totalAmount.toFixed(2)}</h3>
-              </div>
+              <h3>Total: ₹{totalAmount.toFixed(2)}</h3>
             </div>
             <button type="submit" className="btn btn-primary">Place Order</button>
           </form>

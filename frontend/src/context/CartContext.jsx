@@ -8,12 +8,49 @@ const initialState = {
 // Define the reducer function
 const cartReducer = (state, action) => {
   switch (action.type) {
-    case 'ADD_TO_CART':
-      return { ...state, cart: [...state.cart, action.payload] };
-    case 'REMOVE_FROM_CART':
-      return { ...state, cart: state.cart.filter(item => item._id !== action.payload._id) };
+    case 'ADD_TO_CART': {
+      const existingItemIndex = state.cart.findIndex(item => item._id === action.payload._id);
+
+      if (existingItemIndex !== -1) {
+        // If item exists, increase the quantity
+        const updatedCart = [...state.cart];
+        updatedCart[existingItemIndex] = {
+          ...updatedCart[existingItemIndex],
+          quantity: updatedCart[existingItemIndex].quantity + 1
+        };
+        return { ...state, cart: updatedCart };
+      } else {
+        // If item does not exist, add with quantity 1
+        return { ...state, cart: [...state.cart, { ...action.payload, quantity: 1 }] };
+      }
+    }
+
+    case 'REMOVE_FROM_CART': {
+      const existingItemIndex = state.cart.findIndex(item => item._id === action.payload._id);
+
+      if (existingItemIndex !== -1) {
+        const updatedCart = [...state.cart];
+
+        if (updatedCart[existingItemIndex].quantity > 1) {
+          // Reduce quantity by 1
+          updatedCart[existingItemIndex] = {
+            ...updatedCart[existingItemIndex],
+            quantity: updatedCart[existingItemIndex].quantity - 1
+          };
+        } else {
+          // Remove item from cart if quantity is 1
+          updatedCart.splice(existingItemIndex, 1);
+        }
+
+        return { ...state, cart: updatedCart };
+      }
+
+      return state;
+    }
+
     case 'CLEAR_CART':
       return { ...state, cart: [] };
+
     default:
       return state;
   }

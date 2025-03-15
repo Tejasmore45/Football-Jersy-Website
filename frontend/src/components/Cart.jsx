@@ -20,7 +20,7 @@ const Cart = () => {
       return;
     }
 
-    dispatch({ type: 'REMOVE_FROM_CART', payload: item }); // Dispatch REMOVE_FROM_CART action
+    dispatch({ type: 'REMOVE_FROM_CART', payload: state.cart.find(c => c._id === item._id) }); // Dispatch REMOVE_FROM_CART action
   };
 
   const handleClearCart = () => {
@@ -41,26 +41,25 @@ const Cart = () => {
   
       // Ensure price is a number
       if (typeof price === 'string') {
-        price = Number(price.replace('₹', ''));
+        price = Number(price.replace(/[^0-9.-]+/g, ''));
       } else if (typeof price === 'number') {
         // If price is already a number, use it directly
         price = Number(price);
       } else {
-        console.warn(`Unexpected price format for item ${item.id}`);
+        console.warn(`Unexpected price format for item ${item._id}`);
         return;
       }
   
-      if (itemMap.has(item.id)) {
-        const existingItem = itemMap.get(item.id);
+      if (itemMap.has(item._id)) {
+        const existingItem = itemMap.get(item._id);
         existingItem.quantity += 1;
         existingItem.totalPrice += price;
       } else {
-        itemMap.set(item.id, { ...item, quantity: 1, totalPrice: price });
+        itemMap.set(item._id, { ...item, quantity: 1, totalPrice: price });
       }
     });
     return Array.from(itemMap.values());
   };
-  
 
   const aggregatedItems = aggregateCartItems();
   const totalAmount = aggregatedItems.reduce((total, item) => total + item.totalPrice, 0);
@@ -76,7 +75,7 @@ const Cart = () => {
       ) : (
         <div className="cart-items">
           {aggregatedItems.map((item) => (
-            <div key={item.id} className="cart-item">
+            <div key={item._id} className="cart-item">
               <img src={item.imageUrl} alt={item.name} className="cart-item-image" />
               <div className="cart-item-details">
                 <h4>{item.name}</h4>

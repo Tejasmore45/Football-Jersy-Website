@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import axios from 'axios'; // Import axios
+import { useNavigate } from 'react-router-dom';
 import './CheckoutPage.css'; // Import CSS for styling
 
 const CheckoutPage = () => {
   const { state, dispatch } = useCart(); // Access cart state and dispatch
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     address: '',
@@ -15,6 +17,7 @@ const CheckoutPage = () => {
   });
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,6 +29,8 @@ const CheckoutPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
 
     // Aggregate cart items
     const aggregateCartItems = () => {
@@ -94,12 +99,18 @@ const CheckoutPage = () => {
       if (response.status === 201) {
         setOrderPlaced(true);
         dispatch({ type: 'CLEAR_CART' }); // Clear cart after successful order
+        // Redirect to orders page after 2 seconds
+        setTimeout(() => {
+          navigate('/orders');
+        }, 2000);
       } else {
         throw new Error('Order could not be placed.');
       }
     } catch (err) {
-      setError('Failed to place the order.');
+      setError('Failed to place the order. ' + (err.response?.data?.message || err.message || ''));
       console.error('Error details:', err.response?.data || err.message || err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -131,15 +142,54 @@ const CheckoutPage = () => {
 
   const totalAmount = aggregatedItems.reduce((acc, item) => acc + item.totalPrice, 0);
 
+  // Check if cart is empty
+  if (aggregatedItems.length === 0 && !orderPlaced) {
+    return (
+      <div className="checkout-container empty-checkout">
+        <h2>Your cart is empty</h2>
+        <p>Add some items to your cart before checkout.</p>
+        <button className="btn btn-primary" onClick={() => navigate('/jerseys')}>
+          Browse Jerseys
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="checkout-container">
       <h2>Checkout</h2>
       {orderPlaced ? (
-        <div className="order-placed-message">Order placed successfully!</div>
+        <div className="order-placed-message">
+          <div className="success-checkmark">
+            <div className="check-icon">
+              <span className="icon-line line-tip"></span>
+              <span className="icon-line line-long"></span>
+            </div>
+          </div>
+          <p>Order placed successfully!</p>
+          <p>Redirecting to your orders...</p>
+        </div>
       ) : (
         <>
           {error && <p className="error-message">{error}</p>}
+          <div className="checkout-summary">
+            <h3>Order Summary</h3>
+            <div className="summary-items">
+              {aggregatedItems.map(item => (
+                <div key={item._id} className="summary-item">
+                  <div className="summary-item-name">{item.name} (x{item.quantity})</div>
+                  <div className="summary-item-price">₹{item.totalPrice.toFixed(2)}</div>
+                </div>
+              ))}
+            </div>
+            <div className="summary-total">
+              <div>Total</div>
+              <div>₹{totalAmount.toFixed(2)}</div>
+            </div>
+          </div>
+          
           <form onSubmit={handleSubmit} className="checkout-form">
+            <h3>Shipping Information</h3>
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input
@@ -195,10 +245,20 @@ const CheckoutPage = () => {
                 required
               />
             </div>
-            <div className="order-summary">
-              <h3>Total: ₹{totalAmount.toFixed(2)}</h3>
-            </div>
-            <button type="submit" className="btn btn-primary">Place Order</button>
+            <button 
+              type="submit" 
+              className={`btn ${isSubmitting ? 'btn-loading' : 'btn-primary'}`}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <span className="btn-spinner"></span>
+                  <span className="loading-text">Processing...</span>
+                </>
+              ) : (
+                'Place Order'
+              )}
+            </button>
           </form>
         </>
       )}

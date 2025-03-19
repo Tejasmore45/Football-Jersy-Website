@@ -5,10 +5,13 @@ import './JerseyList.css';
 
 const JerseyList = () => {
   const [jerseys, setJerseys] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchJerseys = async () => {
       try {
+        setLoading(true);
         const response = await fetch('https://football-jersy-website-backend.onrender.com/api/jerseys');
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -17,11 +20,34 @@ const JerseyList = () => {
         setJerseys(data);
       } catch (error) {
         console.error('Error fetching jerseys:', error);
+        setError('Failed to load jerseys. Please try again later.');
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchJerseys();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="jersey-list loading-container">
+        <div className="loader"></div>
+        <p>Loading jerseys...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="jersey-list error-container">
+        <p className="error-message">{error}</p>
+        <button className="btn btn-primary" onClick={() => window.location.reload()}>
+          Retry
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="jersey-list">

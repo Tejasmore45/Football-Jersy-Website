@@ -6,6 +6,7 @@
   padding: 20px;
   background-color: #ffffff; /* White background for consistency with the theme */
   gap: 20px; /* Add gap between items */
+  min-height: 300px;
 }
 
 /* No Jerseys Message Styling */
@@ -17,10 +18,67 @@
   margin-top: 20px;
 }
 
+/* Loading Container Styling */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  width: 100%;
+}
+
+.loading-container p {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #007bff;
+}
+
+/* Error Container Styling */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  width: 100%;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Loader Animation */
+.loader {
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #007bff;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .jersey-list {
     padding: 15px; /* Adjust padding for smaller screens */
+  }
+  
+  .loading-container, .error-container {
+    height: 300px;
+  }
+  
+  .loader {
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -28,5 +86,14 @@
   .jersey-list {
     gap: 15px; /* Reduce gap between items */
     padding: 10px; /* Further reduced padding */
+  }
+  
+  .loading-container, .error-container {
+    height: 250px;
+  }
+  
+  .loader {
+    width: 30px;
+    height: 30px;
   }
 }

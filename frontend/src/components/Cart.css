@@ -5,6 +5,7 @@
   color: #000000; /* Black text color */
   max-width: 1200px; /* Maximum width for larger screens */
   margin: auto; /* Center the container */
+  min-height: 400px;
 }
 
 /* Cart Items Container Styling */
@@ -23,6 +24,12 @@
   background-color: #ffffff; /* White background for items */
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: all 0.3s ease;
+}
+
+.cart-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 /* Cart Item Image Styling */
@@ -59,6 +66,23 @@
   border-radius: 5px;
   margin-bottom: 20px;
   text-align: center; /* Center text */
+  animation: fadeInOut 3s forwards;
+}
+
+/* Empty Cart Styling */
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.empty-cart p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #6c757d;
 }
 
 /* Cart Actions Styling */
@@ -75,6 +99,10 @@
   font-weight: bold; /* Emphasize the total amount */
   color: #000000; /* Black text color */
   margin-bottom: 15px; /* Space below total amount */
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  text-align: center;
 }
 
 /* Button Styling */
@@ -84,9 +112,10 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth transition for background color */
-  width: auto; /* Ensure buttons don’t take full width */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for background color */
+  width: auto; /* Ensure buttons don't take full width */
   text-align: center; /* Ensure text is centered within the button */
+  position: relative;
 }
 
 /* Primary Button */
@@ -97,6 +126,7 @@
 
 .btn-primary:hover {
   background-color: #0056b3;
+  transform: scale(1.05);
 }
 
 /* Warning Button */
@@ -107,6 +137,7 @@
 
 .btn-warning:hover {
   background-color: #e0a800;
+  transform: scale(1.05);
 }
 
 /* Danger Button */
@@ -117,6 +148,36 @@
 
 .btn-danger:hover {
   background-color: #c82333;
+  transform: scale(1.05);
+}
+
+/* Loading Button */
+.btn-loading {
+  cursor: not-allowed;
+  opacity: 0.8;
+  min-width: 100px;
+}
+
+/* Spinner Animation */
+.btn-spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 /* Responsive Design */
@@ -129,6 +190,7 @@
   .cart-item-image {
     width: 80px; /* Smaller image for smaller screens */
     margin-right: 15px; /* Space between image and details */
+    margin-bottom: 0;
   }
 
   .cart-actions {

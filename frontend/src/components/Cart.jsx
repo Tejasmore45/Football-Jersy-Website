@@ -7,6 +7,8 @@ const Cart = () => {
   const { state, dispatch } = useCart(); // Access cart state and dispatch from CartContext
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
   const [showLoginRequired, setShowLoginRequired] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(null);
+  const [isClearing, setIsClearing] = useState(false);
 
   // Update isLoggedIn state based on localStorage changes
   useEffect(() => {
@@ -20,7 +22,13 @@ const Cart = () => {
       return;
     }
 
-    dispatch({ type: 'REMOVE_FROM_CART', payload: state.cart.find(c => c._id === item._id) }); // Dispatch REMOVE_FROM_CART action
+    setIsRemoving(item._id);
+    
+    // Simulate a slight delay for loading effect
+    setTimeout(() => {
+      dispatch({ type: 'REMOVE_FROM_CART', payload: state.cart.find(c => c._id === item._id) }); // Dispatch REMOVE_FROM_CART action
+      setIsRemoving(null);
+    }, 300);
   };
 
   const handleClearCart = () => {
@@ -30,7 +38,13 @@ const Cart = () => {
       return;
     }
 
-    dispatch({ type: 'CLEAR_CART' }); // Dispatch CLEAR_CART action
+    setIsClearing(true);
+    
+    // Simulate a slight delay for loading effect
+    setTimeout(() => {
+      dispatch({ type: 'CLEAR_CART' }); // Dispatch CLEAR_CART action
+      setIsClearing(false);
+    }, 500);
   };
 
   // Aggregate identical jerseys in the cart
@@ -72,7 +86,12 @@ const Cart = () => {
         <div className="login-required-popup">Login required to modify cart</div>
       )}
       {aggregatedItems.length === 0 ? (
-        <p>Your cart is empty</p>
+        <div className="empty-cart">
+          <p>Your cart is empty</p>
+          <Link to="/jerseys">
+            <button className="btn btn-primary">Continue Shopping</button>
+          </Link>
+        </div>
       ) : (
         <div className="cart-items">
           {aggregatedItems.map((item) => (
@@ -85,16 +104,29 @@ const Cart = () => {
                 <p>Quantity: {item.quantity}</p>
                 <button
                   onClick={() => handleRemoveFromCart(item)}
-                  className="btn btn-danger"
+                  className={`btn ${isRemoving === item._id ? 'btn-loading' : 'btn-danger'}`}
+                  disabled={isRemoving === item._id}
                 >
-                  Remove
+                  {isRemoving === item._id ? (
+                    <span className="btn-spinner"></span>
+                  ) : (
+                    'Remove'
+                  )}
                 </button>
               </div>
             </div>
           ))}
           <div className="cart-actions">
-            <button onClick={handleClearCart} className="btn btn-warning">
-              Clear Cart
+            <button 
+              onClick={handleClearCart} 
+              className={`btn ${isClearing ? 'btn-loading' : 'btn-warning'}`}
+              disabled={isClearing}
+            >
+              {isClearing ? (
+                <span className="btn-spinner"></span>
+              ) : (
+                'Clear Cart'
+              )}
             </button>
             <div className="cart-total">
               <h3>Total: ₹{totalAmount.toFixed(2)}</h3>

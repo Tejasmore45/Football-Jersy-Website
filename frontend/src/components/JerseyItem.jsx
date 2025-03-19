@@ -20,7 +20,7 @@ const JerseyItem = ({ id, name, price, description, imageUrl }) => {
     }
 
     // If logged in, add item to cart
-    const jersey = { id, name, price, description, imageUrl };
+    const jersey = { _id: id, name, price, description, imageUrl };
     dispatch({ type: 'ADD_TO_CART', payload: jersey });
   };
 

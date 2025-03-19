@@ -31,8 +31,19 @@ const CheckoutPage = () => {
     const aggregateCartItems = () => {
       const itemMap = new Map();
       state.cart.forEach(item => {
-        const priceString = typeof item.price === 'string' ? item.price : item.price.toString();
-        const price = parseFloat(priceString.replace('₹', '').replace(',', '').trim());
+        // Ensure price is a number
+        let price = 0;
+        if (typeof item.price === 'string') {
+          // Remove currency symbol and convert to number
+          price = parseFloat(item.price.replace(/[^\d.]/g, ''));
+        } else if (typeof item.price === 'number') {
+          price = item.price;
+        }
+        
+        if (isNaN(price)) {
+          price = 0;
+          console.warn(`Invalid price format for item ${item._id}`);
+        }
 
         if (itemMap.has(item._id)) {
           const existingItem = itemMap.get(item._id);
@@ -64,7 +75,9 @@ const CheckoutPage = () => {
             postalCode: formData.postalCode,
             country: formData.country
           },
-          paymentMethod: formData.paymentMethod
+          paymentMethod: formData.paymentMethod,
+          taxPrice: 0,
+          shippingPrice: 0
         },
         {
           headers: {
@@ -86,8 +99,19 @@ const CheckoutPage = () => {
   };
 
   const aggregatedItems = state.cart.reduce((acc, item) => {
-    const priceString = typeof item.price === 'string' ? item.price : item.price.toString();
-    const price = parseFloat(priceString.replace('₹', '').replace(',', '').trim());
+    // Ensure price is a number
+    let price = 0;
+    if (typeof item.price === 'string') {
+      // Remove currency symbol and convert to number
+      price = parseFloat(item.price.replace(/[^\d.]/g, ''));
+    } else if (typeof item.price === 'number') {
+      price = item.price;
+    }
+    
+    if (isNaN(price)) {
+      price = 0;
+      console.warn(`Invalid price format for item ${item._id}`);
+    }
 
     const existingItem = acc.find(cartItem => cartItem._id === item._id);
     if (existingItem) {

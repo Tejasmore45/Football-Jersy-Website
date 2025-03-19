@@ -37,19 +37,20 @@ const Cart = () => {
   const aggregateCartItems = () => {
     const itemMap = new Map();
     state.cart.forEach(item => {
-      let price = item.price;
-  
       // Ensure price is a number
-      if (typeof price === 'string') {
-        price = Number(price.replace(/[^0-9.-]+/g, ''));
-      } else if (typeof price === 'number') {
-        // If price is already a number, use it directly
-        price = Number(price);
-      } else {
-        console.warn(`Unexpected price format for item ${item._id}`);
-        return;
+      let price = 0;
+      if (typeof item.price === 'string') {
+        // Remove currency symbol and convert to number
+        price = parseFloat(item.price.replace(/[^\d.]/g, ''));
+      } else if (typeof item.price === 'number') {
+        price = item.price;
       }
-  
+      
+      if (isNaN(price)) {
+        price = 0;
+        console.warn(`Invalid price format for item ${item._id}`);
+      }
+
       if (itemMap.has(item._id)) {
         const existingItem = itemMap.get(item._id);
         existingItem.quantity += 1;

@@ -60,25 +60,30 @@ const CheckoutPage = () => {
     const totalAmount = aggregatedItems.reduce((acc, item) => acc + item.totalPrice, 0);
 
     try {
+      // Debug log the data we're sending
+      const orderData = {
+        orderItems: aggregatedItems.map(item => ({
+          jersey: item._id || item.id, // Try both possible ID formats
+          qty: item.quantity,
+          price: parseFloat(item.totalPrice)
+        })),
+        totalPrice: parseFloat(totalAmount),
+        shippingAddress: {
+          address: formData.address,
+          city: formData.city,
+          postalCode: formData.postalCode,
+          country: formData.country
+        },
+        paymentMethod: formData.paymentMethod,
+        taxPrice: 0,
+        shippingPrice: 0
+      };
+      
+      console.log('Sending order data:', orderData);
+      
       const response = await axios.post(
         'https://football-jersy-website-backend.onrender.com/api/orders',
-        {
-          orderItems: aggregatedItems.map(item => ({
-            jersey: item._id,
-            qty: item.quantity,
-            price: item.totalPrice
-          })),
-          totalPrice: totalAmount,
-          shippingAddress: {
-            address: formData.address,
-            city: formData.city,
-            postalCode: formData.postalCode,
-            country: formData.country
-          },
-          paymentMethod: formData.paymentMethod,
-          taxPrice: 0,
-          shippingPrice: 0
-        },
+        orderData,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`

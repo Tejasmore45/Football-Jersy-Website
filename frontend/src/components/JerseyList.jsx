@@ -33,6 +33,7 @@ const JerseyList = () => {
             name={jersey.name}
             price={jersey.price}
             description={jersey.description}
+            size={jersey.size || "M"}
             imageUrl={jerseyImages[jersey.imageUrl.replace('/images/', '')] || 'https://via.placeholder.com/300'}
           />
         ))

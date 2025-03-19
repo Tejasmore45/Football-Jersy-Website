@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import './JerseyItem.css';
 
-const JerseyItem = ({ id, name, price, description, imageUrl }) => {
+const JerseyItem = ({ id, name, price, description, imageUrl, size = "M" }) => {
   const { dispatch } = useCart();
   const [showLoginRequired, setShowLoginRequired] = useState(false);
 
@@ -20,7 +20,7 @@ const JerseyItem = ({ id, name, price, description, imageUrl }) => {
     }
 
     // If logged in, add item to cart
-    const jersey = { _id: id, name, price, description, imageUrl };
+    const jersey = { _id: id, name, price, description, imageUrl, size };
     dispatch({ type: 'ADD_TO_CART', payload: jersey });
   };
 
@@ -38,6 +38,7 @@ const JerseyItem = ({ id, name, price, description, imageUrl }) => {
         <h2 className="jersey-card-title">{name}</h2>
         <p className="jersey-card-price">₹{price}</p>
         <p className="jersey-card-description">{description}</p>
+        <p className="jersey-card-size">Size: {size}</p>
         <button className="btn btn-primary" onClick={addToCart}>
           Add to Cart
         </button>
